@@ -1,0 +1,7 @@
+package com.employee.emp.services;
+
+import com.employee.emp.models.Employee;
+
+public interface EmployeeService {
+	Employee registerEmp(Employee employee);
+}

@@ -1,0 +1,78 @@
+package com.employee.emp.models;
+
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+public class Department {
+	@Id
+	private UUID id;
+	private String depname;
+	private int yeo;
+	private String jobtype;
+	private String technology;
+	
+	public Department() {
+		super();
+	}
+
+	public Department(UUID id, String depname, int yeo,String jobtype, String technology) {
+		super();
+		this.id = id;
+		this.depname = depname;
+		this.yeo = yeo;
+		this.jobtype = jobtype;
+		this.technology = technology;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getDepname() {
+		return depname;
+	}
+
+	public void setDepname(String depname) {
+		this.depname = depname;
+	}
+
+	public int getYeo() {
+		return yeo;
+	}
+
+	public void setYeo(int yeo) {
+		this.yeo = yeo;
+	}
+
+	public String getJobtype() {
+		return jobtype;
+	}
+
+	public void setJobtype(String jobtype) {
+		this.jobtype = jobtype;
+	}
+
+	public String getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", depname=" + depname + ", yeo=" + yeo + ", jobtype=" + jobtype
+				+ ", technology=" + technology + "]";
+	}
+
+	
+	
+	
+	
+}

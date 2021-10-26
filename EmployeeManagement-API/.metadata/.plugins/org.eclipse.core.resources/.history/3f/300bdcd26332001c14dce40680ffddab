@@ -1,0 +1,60 @@
+package com.employee.emp.models;
+
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Contact {
+	@Id
+	private UUID id;
+	private String phonenum;
+	private String personalemail;
+	private Address address;
+	public Contact() {
+		super();
+	}
+	public Contact(UUID id, String phonenum, String personalemail, Address address) {
+		super();
+		this.id = id;
+		this.phonenum = phonenum;
+		this.personalemail = personalemail;
+		this.address = address;
+	}
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	public String getPhonenum() {
+		return phonenum;
+	}
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
+	public String getPersonalemail() {
+		return personalemail;
+	}
+	public void setPersonalemail(String personalemail) {
+		this.personalemail = personalemail;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", phonenum=" + phonenum + ", personalemail=" + personalemail + ", address="
+				+ address + "]";
+	}
+	
+	
+}

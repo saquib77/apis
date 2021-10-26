@@ -1,0 +1,5 @@
+package com.employee.emp.models;
+
+public class Employee {
+
+}

@@ -1,0 +1,9 @@
+package com.employee.emp.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.employee.emp.daos.EmployeeDao;
+
+public interface EmpRepository extends JpaRepository<EmployeeDao, UUID> {
+
+}

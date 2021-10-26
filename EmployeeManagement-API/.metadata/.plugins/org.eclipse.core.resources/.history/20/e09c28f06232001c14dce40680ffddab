@@ -1,0 +1,17 @@
+package com.employee.emp.repositories;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.employee.emp.daos.EmployeeDao;
+
+public interface EmpRepository extends JpaRepository<EmployeeDao, UUID> {
+
+	
+	@Query("select * from contact c where lower(c.personalemail) = lower(:personalemail) and (select * from employee e where lower(e.companyemail) = lower(:companyemail) ) ")
+	Optional<EmployeeDao> find(@Param("companyemail") String companyemail,@Param("personalemail") String personalemail);
+}

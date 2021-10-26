@@ -1,0 +1,58 @@
+package com.employee.emp.mappers;
+
+import com.employee.emp.daos.AddressDao;
+import com.employee.emp.daos.DepartmentDao;
+import com.employee.emp.daos.EmployeeDao;
+import com.employee.emp.models.Address;
+import com.employee.emp.models.Department;
+import com.employee.emp.models.Employee;
+
+import org.springframework.beans.BeanUtils;
+
+public class Mapper {
+	public static EmployeeDao EmpToEmpDao(Employee emp) {
+		EmployeeDao empdao = new EmployeeDao();
+		empdao.setId(emp.getId());
+		empdao.setCompanyemail(emp.getCompanyemail());
+		empdao.setFirstname(emp.getFirstname());
+		empdao.setLastname(emp.getLastname());
+		empdao.setPassword(emp.getPassword());
+		empdao.setPhonenum(emp.getPhonenum());
+		empdao.setAddress(Mapper.AddressToAddressDao(emp.getAddress()));
+		empdao.setDepartment(Mapper.DeptToDeptDao(emp.getDepartment()));
+		return empdao;
+	}
+	public static Employee EmpDaoToEmp(EmployeeDao empdao,Employee emp) {
+		emp.setId(empdao.getId());
+		emp.setCompanyemail(empdao.getCompanyemail());
+		emp.setFirstname(empdao.getFirstname());
+		emp.setLastname(empdao.getLastname());
+		emp.setPhonenum(empdao.getPhonenum());
+		emp.setAddress(Mapper.AddressDaoToAddress(empdao.getAddress()));
+		emp.setDepartment(Mapper.DeptDaoToDept(empdao.getDepartment()));
+		return emp;
+	}
+	public static Address AddressDaoToAddress(AddressDao addressdao) {
+		Address address = new Address();
+		address.setId(addressdao.getId());
+		BeanUtils.copyProperties(addressdao, address);
+		return address;
+	}
+	public static AddressDao AddressToAddressDao(Address address) {
+		AddressDao addressDao = new AddressDao();
+		BeanUtils.copyProperties(address, addressDao);
+		return addressDao;
+	}
+	
+	public static DepartmentDao DeptToDeptDao(Department dept) {
+		DepartmentDao deptDao = new DepartmentDao();
+		BeanUtils.copyProperties(dept, deptDao);
+		return deptDao;
+	}
+	
+	public static Department DeptDaoToDept(DepartmentDao depdao) {
+		Department dept = new Department();
+		BeanUtils.copyProperties(depdao, dept);
+		return dept;
+	}
+}

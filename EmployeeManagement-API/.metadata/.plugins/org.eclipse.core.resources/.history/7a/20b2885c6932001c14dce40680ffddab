@@ -1,0 +1,87 @@
+package com.employee.emp.daos;
+
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="department")
+public class DepartmentDao {
+	@Id
+	@GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(length=16)
+	private UUID id;
+	@Column
+	private String deptname;
+	@Column
+	private int yoe;
+	@Column
+	private String jobtype;
+	@Column
+	private String technology;
+	@OneToOne(mappedBy = "department")
+	private EmployeeDao employee;
+	public DepartmentDao() {
+		super();
+	}
+	public DepartmentDao(UUID id, String deptname,int yoe, String jobtype, String technology, EmployeeDao employee) {
+		super();
+		this.id = id;
+		this.deptname = deptname;
+		this.yoe = yoe;
+		this.jobtype = jobtype;
+		this.technology = technology;
+		this.employee = employee;
+	}
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
+	public int getYeo() {
+		return yoe;
+	}
+	public void setYeo(int yoe) {
+		this.yoe = yoe;
+	}
+	public String getJobtype() {
+		return jobtype;
+	}
+	public void setJobtype(String jobtype) {
+		this.jobtype = jobtype;
+	}
+	public String getTechnology() {
+		return technology;
+	}
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+	public EmployeeDao getEmployee() {
+		return employee;
+	}
+	public void setEmployee(EmployeeDao employee) {
+		this.employee = employee;
+	}
+	@Override
+	public String toString() {
+		return "DepartmentDao [id=" + id + ", depname=" + deptname + ", yeo=" + yoe + ", jobtype=" + jobtype
+				+ ", technology=" + technology + ", employee=" + employee + "]";
+	}
+	
+	
+}

@@ -1,0 +1,34 @@
+package com.employee.emp.models;
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Employee {
+	@Id
+	private UUID id;
+	private String firstname;
+	private String lastname;
+	private String companyemail;
+	private String phonenum;
+	private String password;
+	private Date joining_date;
+	private int salary;
+	private String employee_title;
+	private List<String> previous_company;
+	private Address address;
+	private Department department;
+	public Employee() {
+		super();
+	}
+	
+	
+	
+}

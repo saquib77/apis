@@ -1,0 +1,82 @@
+package com.employee.emp.daos;
+
+import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="contact")
+public class ContactDao {
+	@Id
+	@GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(length=16)
+	private UUID id;
+	@Column
+	private String phonenum;
+	@Column
+	private String personalemail;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private AddressDao address;
+
+	public ContactDao() {
+		super();
+	}
+
+	public ContactDao(UUID id, String phonenum, String personalemail, AddressDao address) {
+		super();
+		this.id = id;
+		this.phonenum = phonenum;
+		this.personalemail = personalemail;
+		this.address = address;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getPhonenum() {
+		return phonenum;
+	}
+
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
+
+	public String getPersonalemail() {
+		return personalemail;
+	}
+
+	public void setPersonalemail(String personalemail) {
+		this.personalemail = personalemail;
+	}
+
+	public AddressDao getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDao address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "ContactDao [id=" + id + ", phonenum=" + phonenum + ", personalemail=" + personalemail + ", address="
+				+ address + "]";
+	}
+	
+	
+}

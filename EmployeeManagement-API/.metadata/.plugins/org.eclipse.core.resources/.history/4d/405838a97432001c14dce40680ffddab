@@ -1,0 +1,80 @@
+package com.employee.emp.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.employee.emp.daos.EmployeeDao;
+import com.employee.emp.mappers.Mapper;
+import com.employee.emp.models.Employee;
+import com.employee.emp.repositories.EmpRepository;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService{
+
+	@Autowired
+	private EmpRepository empRepo;
+	
+	@Override
+	public Optional<Employee> registerEmp(Employee employee) {
+		Optional<EmployeeDao> empDb = empRepo.findBycompanyemail(employee.getCompanyemail());
+		if(empDb.isEmpty()) {
+			empRepo.save(Mapper.EmpToEmpDao(employee));
+			return Optional.of(employee);
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<List<Employee>> getAllEmployee() {
+		List<EmployeeDao> listDb = empRepo.findAll();
+		List<Employee> list = new ArrayList<>();
+		for(EmployeeDao e : listDb) {
+			list.add(Mapper.EmpDaoToEmp(e, new Employee()));
+		}
+		return Optional.of(list);
+	}
+
+	@Override
+	public Optional<Employee> deleteEmployee(UUID id) {
+		Optional<EmployeeDao> emp = empRepo.findById(id);
+		if(emp.isPresent()) {
+			empRepo.delete(emp.get());
+			return Optional.of(Mapper.EmpDaoToEmp(emp.get(), new Employee()));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<Employee> updateEmployee(UUID id,Employee emp_new) {
+		Optional<EmployeeDao> emp = empRepo.findById(id);
+		if(emp.isPresent()) {
+			 EmployeeDao empdao = Mapper.UpdateEmployeeDao(emp_new, emp.get());
+			 System.out.println(empdao);
+			 empRepo.save(empdao);
+			 return Optional.of(Mapper.EmpDaoToEmp(empdao));
+		}
+		return Optional.empty();
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,14 @@
+package com.employee.emp.models;
+
+import java.util.UUID;
+
+public class Employee {
+	private UUID id;
+	private String firstname;
+	private String lastname;
+	private String email;
+	private String phnum;
+	private String yoe;
+	private Long deptid;
+	private Department department;
+}

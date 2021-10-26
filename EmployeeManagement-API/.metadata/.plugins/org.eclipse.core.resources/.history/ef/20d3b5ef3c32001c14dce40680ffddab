@@ -1,0 +1,26 @@
+package com.employee.emp.mappers;
+
+import com.employee.emp.daos.DepartmentDao;
+import com.employee.emp.daos.EmployeeDao;
+import com.employee.emp.models.Department;
+import com.employee.emp.models.Employee;
+
+import org.springframework.beans.BeanUtils;
+
+public class Mapper {
+	public static EmployeeDao EmpToEmpDao(Employee emp) {
+		EmployeeDao empdao = new EmployeeDao();
+		empdao.setId(emp.getId());
+		empdao.setFirstname(emp.getFirstname());
+		empdao.setLastname(emp.getLastname());
+		empdao.setEmail(emp.getEmail());
+		empdao.setPhnum(emp.getPhnum());
+		empdao.setDepartment(emp.getDepartment());
+		return empdao;
+	}
+	public static DepartmentDao DeptToDeptDao(Department dept) {
+		DepartmentDao deptDao = new DepartmentDao();
+		BeanUtils.copyProperties(dept, deptDao);
+		return deptDao;
+	}
+}

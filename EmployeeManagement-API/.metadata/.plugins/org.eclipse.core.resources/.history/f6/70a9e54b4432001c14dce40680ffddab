@@ -1,0 +1,10 @@
+package com.employee.emp.services;
+
+import java.util.Optional;
+
+import com.employee.emp.models.Employee;
+
+public interface EmployeeService {
+	Optional<Employee> registerEmp(Employee employee);
+	
+}

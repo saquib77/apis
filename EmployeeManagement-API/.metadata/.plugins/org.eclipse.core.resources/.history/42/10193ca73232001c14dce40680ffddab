@@ -1,0 +1,30 @@
+package com.employee.emp.daos;
+
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="department")
+public class DepartmentDao {
+	@Id
+	@GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(length=16)
+	private UUID id;
+	@Column
+	private String depname;
+	@Column
+	private String jobtype;
+	@Column
+	private String technology;
+	@OneToOne(mappedBy = "department")
+	private EmployeeDao employee;
+}

@@ -1,0 +1,109 @@
+package com.employee.emp.daos;
+
+import java.util.Date;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="department")
+public class DepartmentDao {
+	
+	@Id
+	@GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(length=16)
+	private UUID id;
+	@Column
+	private String jobid;
+	@Column
+	private String salary;
+	@Column
+	private Float yoe;
+	@Column
+	private Date joining_date;
+	@Column
+	private String jobtype;
+	@Column
+	private String technology;
+	@OneToOne(mappedBy = "department")
+	private EmployeeDao employee;
+	public DepartmentDao() {
+		super();
+	}
+	public DepartmentDao(UUID id, String jobid, String salary, Float yoe, Date joining_date, String jobtype,
+			String technology, EmployeeDao employee) {
+		super();
+		this.id = id;
+		this.jobid = jobid;
+		this.salary = salary;
+		this.yoe = yoe;
+		this.joining_date = joining_date;
+		this.jobtype = jobtype;
+		this.technology = technology;
+		this.employee = employee;
+	}
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	public String getJobid() {
+		return jobid;
+	}
+	public void setJobid(String jobid) {
+		this.jobid = jobid;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public Float getYoe() {
+		return yoe;
+	}
+	public void setYoe(Float yoe) {
+		this.yoe = yoe;
+	}
+	public Date getJoining_date() {
+		return joining_date;
+	}
+	public void setJoining_date(Date joining_date) {
+		this.joining_date = joining_date;
+	}
+	public String getJobtype() {
+		return jobtype;
+	}
+	public void setJobtype(String jobtype) {
+		this.jobtype = jobtype;
+	}
+	public String getTechnology() {
+		return technology;
+	}
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+	public EmployeeDao getEmployee() {
+		return employee;
+	}
+	public void setEmployee(EmployeeDao employee) {
+		this.employee = employee;
+	}
+	@Override
+	public String toString() {
+		return "DepartmentDao [id=" + id + ", jobid=" + jobid + ", salary=" + salary + ", yoe=" + yoe
+				+ ", joining_date=" + joining_date + ", jobtype=" + jobtype + ", technology=" + technology
+				+ ", employee=" + employee + "]";
+	}
+	
+	
+}

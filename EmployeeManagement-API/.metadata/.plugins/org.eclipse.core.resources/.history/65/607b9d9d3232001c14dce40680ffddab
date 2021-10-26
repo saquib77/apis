@@ -1,0 +1,5 @@
+package com.employee.emp.daos;
+
+public class DepartmentDao {
+	
+}

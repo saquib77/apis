@@ -1,0 +1,44 @@
+package com.employee.emp.daos;
+
+import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="employee")
+public class EmployeeDao {
+	@Id
+	@GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(length=16)
+	private UUID id;
+	@Column
+	private String firstname;
+	@Column
+	private String lastname;
+	@Column
+	private String companyemail;
+	@Column
+	private String phonenum;
+	@Column
+	private String password;
+	@OneToOne(cascade = CascadeType.ALL)
+	private AddressDao address;
+	@OneToOne(cascade = CascadeType.ALL)
+	private DepartmentDao department;
+	
+	public EmployeeDao() {
+		super();
+	}
+
+	
+	
+}

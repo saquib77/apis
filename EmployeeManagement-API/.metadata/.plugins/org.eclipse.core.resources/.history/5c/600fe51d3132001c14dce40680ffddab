@@ -1,0 +1,13 @@
+package com.employee.emp.models;
+
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+public class Department {
+	@Id
+	private UUID id;
+	private String depname;
+	private String jobtype;
+	private String technology;
+}

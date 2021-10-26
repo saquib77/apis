@@ -1,0 +1,11 @@
+package com.employee.emp.services;
+
+import java.util.List;
+
+import com.employee.emp.models.Employee;
+
+public interface EmployeeService {
+	Employee registerEmp(Employee employee);
+	List<Employee> getAllEmployee();
+	
+}

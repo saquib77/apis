@@ -1,0 +1,15 @@
+package com.employee.emp.mappers;
+
+import com.employee.emp.daos.EmployeeDao;
+import com.employee.emp.models.Employee;
+
+public class Mapper {
+	public static EmployeeDao EmpToEmpDao(Employee emp) {
+		EmployeeDao empdao = new EmployeeDao();
+		empdao.setId(emp.getId());
+		empdao.setFirstname(emp.getFirstname());
+		empdao.setLastname(emp.getLastname());
+		empdao.setEmail(emp.getEmail());
+		empdao.setPhnum(emp.getPhnum());
+	}
+}
