@@ -1,5 +1,6 @@
 package com.foodapp.food.daos;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,13 +34,16 @@ public class DeliveryPersonDao {
 	private String avgTime;
 	@Column
 	private int currentPincode;
-	
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
 	public DeliveryPersonDao() {
 		super();
 	}
-	
+
 	public DeliveryPersonDao(UUID id, String name, String email, String phnum, double rating, String avgTime,
-			int currentPincode) {
+			int currentPincode, Date created, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,6 +52,26 @@ public class DeliveryPersonDao {
 		this.rating = rating;
 		this.avgTime = avgTime;
 		this.currentPincode = currentPincode;
+		this.created = created;
+		this.updated = updated;
+	}
+
+
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 
 	public UUID getId() {
@@ -96,8 +122,11 @@ public class DeliveryPersonDao {
 	@Override
 	public String toString() {
 		return "DeliveryPersonDao [id=" + id + ", name=" + name + ", email=" + email + ", phnum=" + phnum + ", rating="
-				+ rating + ", avgTime=" + avgTime + ", currentPincode=" + currentPincode + "]";
+				+ rating + ", avgTime=" + avgTime + ", currentPincode=" + currentPincode + ", created=" + created
+				+ ", updated=" + updated + "]";
 	}
+
+	
 
 	
 	

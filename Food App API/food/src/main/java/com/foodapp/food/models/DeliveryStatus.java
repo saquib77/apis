@@ -1,5 +1,6 @@
 package com.foodapp.food.models;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -20,12 +21,16 @@ public class DeliveryStatus {
 	private String deliveryPersonName;
 	private double deliveryPersonRating;
 	private boolean deliveryStatus;
+	private Date created;
+	private Date updated;
 	public DeliveryStatus() {
 		super();
 	}
-	public DeliveryStatus(String restaurantName, String dishName, double ammount, String estTime, String address,
-			String deliveryPersonName, double deliveryPersonRating, boolean deliveryStatus) {
+	public DeliveryStatus(UUID id, String restaurantName, String dishName, double ammount, String estTime,
+			String address, String deliveryPersonName, double deliveryPersonRating, boolean deliveryStatus,
+			Date created, Date updated) {
 		super();
+		this.id = id;
 		this.restaurantName = restaurantName;
 		this.dishName = dishName;
 		this.ammount = ammount;
@@ -34,6 +39,8 @@ public class DeliveryStatus {
 		this.deliveryPersonName = deliveryPersonName;
 		this.deliveryPersonRating = deliveryPersonRating;
 		this.deliveryStatus = deliveryStatus;
+		this.created = created;
+		this.updated = updated;
 	}
 	public String getRestaurantName() {
 		return restaurantName;
@@ -83,12 +90,32 @@ public class DeliveryStatus {
 	public void setDeliveryStatus(boolean deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
 	}
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
-		return "DeliveryStatus [restaurantName=" + restaurantName + ", dishName=" + dishName + ", ammount=" + ammount
-				+ ", estTime=" + estTime + ", address=" + address + ", deliveryPersonName=" + deliveryPersonName
-				+ ", deliveryPersonRating=" + deliveryPersonRating + ", deliveryStatus=" + deliveryStatus + "]";
+		return "DeliveryStatus [id=" + id + ", restaurantName=" + restaurantName + ", dishName=" + dishName
+				+ ", ammount=" + ammount + ", estTime=" + estTime + ", address=" + address + ", deliveryPersonName="
+				+ deliveryPersonName + ", deliveryPersonRating=" + deliveryPersonRating + ", deliveryStatus="
+				+ deliveryStatus + ", created=" + created + ", updated=" + updated + "]";
 	}
+	
 	
 	
 }

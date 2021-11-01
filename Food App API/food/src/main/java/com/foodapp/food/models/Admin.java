@@ -1,6 +1,6 @@
 package com.foodapp.food.models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -17,13 +17,12 @@ public class Admin {
 	private String email;
 	private String phnum;
 	private String password;
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 	public Admin() {
 		super();
 	}
-	public Admin(UUID id, String name, String email, String phnum, String password, Timestamp created,
-			Timestamp updated) {
+	public Admin(UUID id, String name, String email, String phnum, String password, Date created, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,18 +30,6 @@ public class Admin {
 		this.phnum = phnum;
 		this.password = password;
 		this.created = created;
-		this.updated = updated;
-	}
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public Timestamp getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Timestamp updated) {
 		this.updated = updated;
 	}
 	public UUID getId() {
@@ -75,12 +62,22 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", name=" + name + ", email=" + email + ", phnum=" + phnum + ", password=" + password
 				+ ", created=" + created + ", updated=" + updated + "]";
 	}
-	
 	
 }

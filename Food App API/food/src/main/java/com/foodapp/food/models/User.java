@@ -1,6 +1,5 @@
 package com.foodapp.food.models;
-
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -18,13 +17,13 @@ public class User {
 	private String password;
 	private String phnum;
 	private Address address;
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 	public User() {
 		super();
 	}
-	public User(UUID id, String name, String email, String password, String phnum, Address address, Timestamp created,
-			Timestamp updated) {
+	public User(UUID id, String name, String email, String password, String phnum, Address address, Date created,
+			Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -33,19 +32,6 @@ public class User {
 		this.phnum = phnum;
 		this.address = address;
 		this.created = created;
-		this.updated = updated;
-	}
-	
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public Timestamp getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Timestamp updated) {
 		this.updated = updated;
 	}
 	public UUID getId() {
@@ -83,6 +69,18 @@ public class User {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 	@Override
 	public String toString() {

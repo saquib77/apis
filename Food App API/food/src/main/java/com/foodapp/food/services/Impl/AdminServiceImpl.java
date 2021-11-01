@@ -1,13 +1,12 @@
 package com.foodapp.food.services.Impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.foodapp.food.daos.AddressDao;
 import com.foodapp.food.daos.AdminDao;
 import com.foodapp.food.daos.DeliveryPersonDao;
 import com.foodapp.food.daos.DeliveryStatusDao;
@@ -50,6 +49,8 @@ public class AdminServiceImpl implements AdminService{
 	public Optional<Admin> registerAdmin(Admin admin) {
 		Optional<AdminDao> adminDao = adminRepo.findAdminByEmail(admin.getEmail());
 		if(adminDao.isEmpty()) {
+			admin.setCreated(new Date());
+			admin.setUpdated(new Date());
 			AdminDao adminDaoNew = adminRepo.save(Mappers.AdminToAdminDao(admin));
 			return Optional.of(Mappers.AdminDaoToAdmin(adminDaoNew));
 		}
@@ -61,6 +62,7 @@ public class AdminServiceImpl implements AdminService{
 		Optional<AdminDao> adminDaoDb = adminRepo.findAdminByEmail(admin.getEmail());
 		if(adminDaoDb.isPresent()) {
 			AdminDao adminDaoUp = Mappers.AdminUpdater(adminDaoDb.get(),admin);
+			adminDaoUp.setUpdated(new Date());
 			adminRepo.save(adminDaoUp);
 			return Optional.of(Mappers.AdminDaoToAdmin(adminDaoUp));
 		}
@@ -70,11 +72,13 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Optional<Menu> saveMenu(Menu menu) {
 		Optional<AdminDao> adminDaoDb = adminRepo.findAdminByEmail(menu.getAdminEmail());
-		if(adminDaoDb.isEmpty()) {
+		if(!adminDaoDb.isEmpty()) {
+			menu.setCreated(new Date());
+			menu.setUpdated(new Date());
 			List<Dish> dishList = menu.getDishList();
 			for(Dish d : dishList) {
-				//d.setCreated(new Date().getTime());
-				//d.setUpdated(new Date().getTime());
+				d.setCreated(new Date());
+				d.setUpdated(new Date());
 			}
 			menu.setDishList(dishList);
 			MenuDao menuDb = menuRepo.save(Mappers.MenuToMenuDao(menu));
@@ -111,8 +115,8 @@ public class AdminServiceImpl implements AdminService{
 		Optional<MenuDao> menuDb = menuRepo.findByMenuCardName(menuName);
 		if(menuDb.isPresent()) {
 			List<DishDao> dishList = menuDb.get().getDishList();
-			//dish.setCreated(new Date().getTime());
-			//dish.setUpdated(new Date().getTime());
+			dish.setCreated(new Date());
+			dish.setUpdated(new Date());
 			dishList.add(Mappers.DishToDishDao(dish));
 			menuDb.get().setDishList(dishList);
 			MenuDao menuDaoDb = menuRepo.save(menuDb.get());
@@ -149,7 +153,7 @@ public class AdminServiceImpl implements AdminService{
 			List<DishDao> dishList = menuDao.getDishList();
 			for(DishDao d : dishList) {
 				if(dish.getName().equals(d.getName())) {
-					//d.setUpdated(new Date().getTime());
+					d.setUpdated(new Date());
 					DishDao dishUp = Mappers.UpdateDish(d,dish);
 					dishList.remove(d);
 					dishList.add(dishUp);
@@ -169,6 +173,8 @@ public class AdminServiceImpl implements AdminService{
 		Optional<DeliveryPersonDao> delDb = delRepo.findByEmail(delPer.getEmail());
 		if(delDb.isEmpty()) {
 			DeliveryPersonDao delPerDb = Mappers.DeliveryPersonToDeliveryPersonDao(delPer);
+			delPerDb.setCreated(new Date());
+			delPerDb.setUpdated(new Date());
 			return Optional.of(Mappers.DeliveryPersonDaoToDeliveryPerson(delRepo.save(delPerDb)));
 		}
 		return Optional.empty();
@@ -198,6 +204,7 @@ public class AdminServiceImpl implements AdminService{
 				if(d.getPayment()) {
 					orderRepo.delete(d);
 					d.setStatus(true);
+					d.setUpdated(new Date());
 					orderRepo.save(d);
 					DeliverOrder(d);
 					list.add(Mappers.OrderStatusDaoToOrderStatus(d));
@@ -214,6 +221,8 @@ public class AdminServiceImpl implements AdminService{
 		for(DeliveryPersonDao d : delPer) {
 			if(d.getCurrentPincode()==user.get().getAddress().getPincode()) {
 				DeliveryStatusDao ds = Mappers.MapOrder(orderStatusDao, user.get(), d);
+				ds.setCreated(new Date());
+				ds.setUpdated(new Date());
 				delStatRepo.save(ds);
 			}
 		}

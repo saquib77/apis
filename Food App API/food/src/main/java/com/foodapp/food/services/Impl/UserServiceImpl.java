@@ -1,7 +1,7 @@
 package com.foodapp.food.services.Impl;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,6 +41,10 @@ public class UserServiceImpl implements UserService {
 	public Optional<User> addUser(User user) {
 		Optional<UserDao> userDaoDb = userRepo.findByEmail(user.getEmail());
 		if(userDaoDb.isEmpty()) {
+			user.setCreated(new Date());
+			user.setUpdated(new Date());
+			user.getAddress().setCreated(new Date());
+			user.getAddress().setUpdated(new Date());
 			UserDao userDao =  userRepo.save(Mappers.UserToUserDao(user));
 			return Optional.of(Mappers.UserDaoToUser(userDao));
 		}
@@ -74,10 +78,12 @@ public class UserServiceImpl implements UserService {
 		if(userdb.isPresent()) {
 			UserDao userDao = Mappers.UserToUserDao(user);
 			AddressDao userAdDao = new AddressDao();
+			user.getAddress().setUpdated(new Date());
 			userAdDao = Mappers.AddressToAddressDao(userAdDao,user.getAddress());
 			UserDao userUpDao = new UserDao();
 			userUpDao = userDao;
 			userUpDao.setAddress(userAdDao);
+			userUpDao.setUpdated(new Date());
 			userRepo.save(userUpDao);
 			return Optional.of(Mappers.UserDaoToUser(userUpDao));
 		}
@@ -97,7 +103,9 @@ public class UserServiceImpl implements UserService {
 		if(userDaoDb.isPresent()) {
 			UserDao userDb = userDaoDb.get();
 			AddressDao addDao = userDaoDb.get().getAddress();
+			addDao.setUpdated(new Date());
 			userDb.setAddress(Mappers.AddressToAddressDao(addDao, address));
+			userDb.getAddress().setUpdated(new Date());
 			userRepo.save(userDb);
 			return Optional.of(Mappers.UserDaoToUser(userDb));
 		}
@@ -107,6 +115,7 @@ public class UserServiceImpl implements UserService {
 	public Optional<User> updateUserDetails(UUID id, User user){
 		Optional<UserDao> userDaoDb = userRepo.findById(id);
 		if(userDaoDb.isPresent()) {
+			userDaoDb.get().setUpdated(new Date());
 			UserDao userDetails = Mappers.UserToUserDao(userDaoDb.get(), user);
 			userRepo.save(userDetails);
 			return Optional.of(Mappers.UserDaoToUser(userDetails));
@@ -117,7 +126,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<Menu> fetchMenuByRestaurant(String restaurantName) {
 		Optional<MenuDao> menuDb = menuRepo.findByRestaurantName(restaurantName);
-		System.out.println(menuDb.get());
 		if(menuDb.isPresent()) {
 			return Optional.of(Mappers.MenuDaoToMenu(menuDb.get()));
 		}
@@ -130,14 +138,16 @@ public class UserServiceImpl implements UserService {
 		if(menuDb.isPresent()) {
 			List<DishDao> listDish = menuDb.get().getDishList();
 			OrderStatusDao orderStatus = new OrderStatusDao();
+			orderStatus.setCreated(new Date());
+			orderStatus.setUpdated(new Date());
 			for(DishDao d : listDish) {
 				if(d.getName().equals(order.getDishName())){
 					orderStatus.setAmount(order.getQuantity() * Double.parseDouble(d.getPrice()));
 				}
 			}
-			OrderStatusDao orderDetail = Mappers.GetOrderDetailsDao(orderStatus,order);
-			if(orderDetail!=null) {
-				return Optional.of(Mappers.OrderStatusDaoToOrderStatus(orderRepo.save(orderDetail)));
+			orderStatus = Mappers.GetOrderDetailsDao(orderStatus,order);
+			if(orderStatus!=null) {
+				return Optional.of(Mappers.OrderStatusDaoToOrderStatus(orderRepo.save(orderStatus)));
 			}
 		}
 		

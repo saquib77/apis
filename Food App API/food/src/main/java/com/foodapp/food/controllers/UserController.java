@@ -36,7 +36,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();			
 	}
 	@GetMapping("/{id}")
-	private ResponseEntity<Optional<User>> getUserByUUID(@PathVariable("id") UUID id){
+	private ResponseEntity<Optional<User>> fetchUserById(@PathVariable("id") UUID id){
 		Optional<User> userid = userService.getUserById(id);
 		if(userid.isPresent()) {	
 			return ResponseEntity.status(HttpStatus.OK).body(userid);

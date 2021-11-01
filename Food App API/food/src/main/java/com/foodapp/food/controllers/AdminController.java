@@ -106,7 +106,7 @@ public class AdminController {
 		if(orderStatus.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(orderStatus.get());
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@PostMapping("/approveRequest")

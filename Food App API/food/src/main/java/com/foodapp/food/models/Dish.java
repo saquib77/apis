@@ -1,6 +1,5 @@
 package com.foodapp.food.models;
 
-import java.sql.Timestamp;
 import java.util.*;
 import javax.persistence.*;
 
@@ -19,14 +18,13 @@ public class Dish {
 	private String price;
 	private String rating;
 	private String dishTime;
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 	public Dish() {
 		super();
 	}
-	
 	public Dish(UUID id, String name, String desc, String quantity, String price, String rating, String dishTime,
-			Timestamp created, Timestamp updated) {
+			Date created, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,15 +36,6 @@ public class Dish {
 		this.created = created;
 		this.updated = updated;
 	}
-
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
-
 	public UUID getId() {
 		return id;
 	}
@@ -90,14 +79,18 @@ public class Dish {
 	public void setDishTime(String dishTime) {
 		this.dishTime = dishTime;
 	}
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-
-	public Timestamp getUpdated() {
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
 		return updated;
 	}
-
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "Dish [id=" + id + ", name=" + name + ", desc=" + desc + ", quantity=" + quantity + ", price=" + price

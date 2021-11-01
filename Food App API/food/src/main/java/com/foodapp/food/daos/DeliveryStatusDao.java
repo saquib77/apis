@@ -1,5 +1,6 @@
 package com.foodapp.food.daos;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,11 +29,16 @@ public class DeliveryStatusDao {
 	private String deliveryPersonName;
 	private double deliveryPersonRating;
 	private boolean deliveryStatus;
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
 	public DeliveryStatusDao() {
 		super();
 	}
 	public DeliveryStatusDao(UUID id, String restaurantName, String dishName, double ammount, String avgTime,
-			String address, String deliveryPersonName, double deliveryPersonRating, boolean deliveryStatus) {
+			String address, String deliveryPersonName, double deliveryPersonRating, boolean deliveryStatus,
+			Date created, Date updated) {
 		super();
 		this.id = id;
 		this.restaurantName = restaurantName;
@@ -41,6 +49,21 @@ public class DeliveryStatusDao {
 		this.deliveryPersonName = deliveryPersonName;
 		this.deliveryPersonRating = deliveryPersonRating;
 		this.deliveryStatus = deliveryStatus;
+		this.created = created;
+		this.updated = updated;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 	public UUID getId() {
 		return id;
@@ -101,7 +124,8 @@ public class DeliveryStatusDao {
 		return "DeliveryStatusDao [id=" + id + ", restaurantName=" + restaurantName + ", dishName=" + dishName
 				+ ", ammount=" + ammount + ", avgTime=" + avgTime + ", address=" + address + ", deliveryPersonName="
 				+ deliveryPersonName + ", deliveryPersonRating=" + deliveryPersonRating + ", deliveryStatus="
-				+ deliveryStatus + "]";
+				+ deliveryStatus + ", created=" + created + ", updated=" + updated + "]";
 	}
+	
 	
 }

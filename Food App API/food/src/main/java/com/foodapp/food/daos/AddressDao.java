@@ -1,5 +1,6 @@
 package com.foodapp.food.daos;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -30,13 +31,19 @@ public class AddressDao {
 	private String country;
 	@Column
 	private int pincode;
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
+	
 	@OneToOne(mappedBy = "address")
 	private UserDao user;
 	public AddressDao() {
 		super();
 	}
+	
 	public AddressDao(UUID id, String hno, String street, String landmark, String city, String state, String country,
-			int pincode, UserDao user) {
+			int pincode, Date created, Date updated, UserDao user) {
 		super();
 		this.id = id;
 		this.hno = hno;
@@ -46,8 +53,11 @@ public class AddressDao {
 		this.state = state;
 		this.country = country;
 		this.pincode = pincode;
+		this.created = created;
+		this.updated = updated;
 		this.user = user;
 	}
+
 	public UUID getId() {
 		return id;
 	}
@@ -102,11 +112,31 @@ public class AddressDao {
 	public void setUser(UserDao user) {
 		this.user = user;
 	}
+	
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
 	@Override
 	public String toString() {
 		return "AddressDao [id=" + id + ", hno=" + hno + ", street=" + street + ", landmark=" + landmark + ", city="
-				+ city + ", state=" + state + ", country=" + country + ", pincode=" + pincode + ", user=" + user + "]";
+				+ city + ", state=" + state + ", country=" + country + ", pincode=" + pincode + ", created=" + created
+				+ ", updated=" + updated + ", user=" + user + "]";
 	}
+
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.foodapp.food.models;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -18,12 +19,13 @@ public class DeliveryPerson {
 	private double rating;
 	private String avgTime;
 	private int currentPincode;
+	private Date created;
+	private Date updated;
 	public DeliveryPerson() {
 		super();
 	}
-	
 	public DeliveryPerson(UUID id, String name, String email, String phnum, double rating, String avgTime,
-			int currentPincode) {
+			int currentPincode, Date created, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,8 +34,9 @@ public class DeliveryPerson {
 		this.rating = rating;
 		this.avgTime = avgTime;
 		this.currentPincode = currentPincode;
+		this.created = created;
+		this.updated = updated;
 	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -78,13 +81,23 @@ public class DeliveryPerson {
 	public void setCurrentPincode(int currentPincode) {
 		this.currentPincode = currentPincode;
 	}
-
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "DeliveryPerson [id=" + id + ", name=" + name + ", email=" + email + ", phnum=" + phnum + ", rating="
-				+ rating + ", avgTime=" + avgTime + ", currentPincode=" + currentPincode + "]";
+				+ rating + ", avgTime=" + avgTime + ", currentPincode=" + currentPincode + ", created=" + created
+				+ ", updated=" + updated + "]";
 	}
-	
-	
 	
 }

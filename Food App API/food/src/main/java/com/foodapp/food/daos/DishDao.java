@@ -1,6 +1,7 @@
 package com.foodapp.food.daos;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -35,16 +36,16 @@ public class DishDao {
 	private String dishTime;
 	
 	@Column(name="created")
-	private Timestamp created;
-	
+	private Date created;
 	@Column(name="updated")
-	private Timestamp updated;
+	private Date updated;
 	
 	public DishDao() {
 		super();
 	}
+	
 	public DishDao(UUID id, String name, String desc, String quantity, String price, String rating, String dishTime,
-			Timestamp created, Timestamp updated) {
+			Date created, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,6 +57,7 @@ public class DishDao {
 		this.created = created;
 		this.updated = updated;
 	}
+
 	public String getQuantity() {
 		return quantity;
 	}
@@ -112,25 +114,30 @@ public class DishDao {
 	public void setDishTime(String dishTime) {
 		this.dishTime = dishTime;
 	}
-
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(Timestamp created) {
+
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public Timestamp getUpdated() {
+
+	public Date getUpdated() {
 		return updated;
 	}
-	public void setUpdated(Timestamp updated) {
+
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
+
 	@Override
 	public String toString() {
 		return "DishDao [id=" + id + ", name=" + name + ", desc=" + desc + ", quantity=" + quantity + ", price=" + price
 				+ ", rating=" + rating + ", dishTime=" + dishTime + ", created=" + created + ", updated=" + updated
 				+ "]";
 	}
+
+	
 
 	
 

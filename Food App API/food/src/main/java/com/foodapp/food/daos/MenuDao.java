@@ -1,6 +1,5 @@
 package com.foodapp.food.daos;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 import javax.persistence.*;
@@ -24,10 +23,10 @@ public class MenuDao {
 	
 	@Column(name="menuCardName")
 	private String menuCardName;
-	@Column
-	private Timestamp created;
-	@Column
-	private Timestamp updated;
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="menu_fk",referencedColumnName = "id")
@@ -36,8 +35,9 @@ public class MenuDao {
 	public MenuDao() {
 		super();
 	}
-	public MenuDao(UUID id, String adminEmail, String restaurantName, String menuCardName, Timestamp created,
-			Timestamp updated, List<DishDao> dishList) {
+	
+	public MenuDao(UUID id, String adminEmail, String restaurantName, String menuCardName, Date created, Date updated,
+			List<DishDao> dishList) {
 		super();
 		this.id = id;
 		this.adminEmail = adminEmail;
@@ -47,18 +47,7 @@ public class MenuDao {
 		this.updated = updated;
 		this.dishList = dishList;
 	}
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public Timestamp getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
+
 	public UUID getId() {
 		return id;
 	}
@@ -99,12 +88,30 @@ public class MenuDao {
 		this.dishList = dishList;
 	}
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
 	@Override
 	public String toString() {
 		return "MenuDao [id=" + id + ", adminEmail=" + adminEmail + ", restaurantName=" + restaurantName
 				+ ", menuCardName=" + menuCardName + ", created=" + created + ", updated=" + updated + ", dishList="
 				+ dishList + "]";
 	}
+
+	
 
 
 	

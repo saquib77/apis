@@ -1,5 +1,6 @@
 package com.foodapp.food.models;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -19,13 +20,13 @@ public class OrderStatus {
 	private double amount;
 	private boolean payment;
 	private boolean status;
+	private Date created;
+	private Date updated;
 	public OrderStatus() {
 		super();
 	}
-	
-
 	public OrderStatus(UUID id, String email, String restaurantName, String dishName, int quantity, double amount,
-			boolean payment, boolean status) {
+			boolean payment, boolean status, Date created, Date updated) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -35,19 +36,15 @@ public class OrderStatus {
 		this.amount = amount;
 		this.payment = payment;
 		this.status = status;
+		this.created = created;
+		this.updated = updated;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	public UUID getId() {
 		return id;
 	}
@@ -91,17 +88,22 @@ public class OrderStatus {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-
-
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "OrderStatus [id=" + id + ", email=" + email + ", restaurantName=" + restaurantName + ", dishName="
 				+ dishName + ", quantity=" + quantity + ", amount=" + amount + ", payment=" + payment + ", status="
-				+ status + "]";
+				+ status + ", created=" + created + ", updated=" + updated + "]";
 	}
-	
-	
-	
-	
-	
 }

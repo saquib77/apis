@@ -1,6 +1,6 @@
 package com.foodapp.food.daos;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -25,17 +25,18 @@ public class UserDao {
 	private String password;
 	@Column
 	private String phnum;
-	@Column
-	private Timestamp created;
-	@Column
-	private Timestamp updated;
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
 	@OneToOne(cascade = CascadeType.ALL)
 	private AddressDao address;
 	public UserDao() {
 		super();
 	}
-	public UserDao(UUID id, String name, String email, String password, String phnum, Timestamp created,
-			Timestamp updated, AddressDao address) {
+	
+	public UserDao(UUID id, String name, String email, String password, String phnum, Date created, Date updated,
+			AddressDao address) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,18 +47,7 @@ public class UserDao {
 		this.updated = updated;
 		this.address = address;
 	}
-	public Timestamp getCreated() {
-		return created;
-	}
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
-	public Timestamp getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
+
 	public UUID getId() {
 		return id;
 	}
@@ -94,11 +84,30 @@ public class UserDao {
 	public void setAddress(AddressDao address) {
 		this.address = address;
 	}
+	
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDao [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phnum="
 				+ phnum + ", created=" + created + ", updated=" + updated + ", address=" + address + "]";
 	}
+
+	
 	
 	
 }

@@ -24,15 +24,15 @@ public class AdminDao {
 	@Column
 	private String password;
 	@Column(name="created")
-	private Timestamp created;
+	private Date created;
 	@Column(name="updated")
-	private Timestamp updated;
+	private Date updated;
 	public AdminDao() {
-		super();
+		super(); 
 	}
 
-	public AdminDao(UUID id, String name, String email, String phnum, String password, Timestamp created,
-			Timestamp updated) {
+	public AdminDao(UUID id, String name, String email, String phnum, String password, Date created,
+			Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -83,19 +83,19 @@ public class AdminDao {
 		this.password = password;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
+	public void setCreated(Date date) {
+		this.created = date;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 

@@ -1,6 +1,6 @@
 package com.foodapp.food.models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -20,10 +20,24 @@ public class Address {
 	private String state;
 	private String country;
 	private int pincode;
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 	public Address() {
 		super();
+	}
+	public Address(UUID id, String hno, String street, String landmark, String city, String state, String country,
+			int pincode, Date created, Date updated) {
+		super();
+		this.id = id;
+		this.hno = hno;
+		this.street = street;
+		this.landmark = landmark;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.pincode = pincode;
+		this.created = created;
+		this.updated = updated;
 	}
 	public UUID getId() {
 		return id;
@@ -73,12 +87,23 @@ public class Address {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", hno=" + hno + ", street=" + street + ", landmark=" + landmark + ", city=" + city
 				+ ", state=" + state + ", country=" + country + ", pincode=" + pincode + ", created=" + created
 				+ ", updated=" + updated + "]";
 	}
-	
 	
 }

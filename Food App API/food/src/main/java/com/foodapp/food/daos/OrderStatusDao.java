@@ -1,11 +1,14 @@
 package com.foodapp.food.daos;
 
+import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,13 +34,15 @@ public class OrderStatusDao {
 	private boolean payment;
 	@Column
 	private boolean status;
+	@Column(name="created")
+	private Date created;
+	@Column(name="updated")
+	private Date updated;
 	public OrderStatusDao() {
 		super();
 	}
-	
-	
 	public OrderStatusDao(UUID id, String email, String restaurantName, String dishName, int quantity, double amount,
-			boolean payment, boolean status) {
+			boolean payment, boolean status, Date created, Date updated) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -47,8 +52,9 @@ public class OrderStatusDao {
 		this.amount = amount;
 		this.payment = payment;
 		this.status = status;
+		this.created = created;
+		this.updated = updated;
 	}
-
 
 	public UUID getId() {
 		return id;
@@ -99,16 +105,23 @@ public class OrderStatusDao {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public Date getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 	@Override
 	public String toString() {
 		return "OrderStatusDao [id=" + id + ", email=" + email + ", restaurantName=" + restaurantName + ", dishName="
 				+ dishName + ", quantity=" + quantity + ", amount=" + amount + ", payment=" + payment + ", status="
-				+ status + "]";
+				+ status + ", created=" + created + ", updated=" + updated + "]";
 	}
-
-	
-	
 	
 }

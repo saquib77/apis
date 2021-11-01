@@ -1,6 +1,7 @@
 package com.foodapp.food.services.Impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 			for(DeliveryStatusDao d : delDb.get()) {
 				if(d.getDishName().equals(delStat.getDishName())) {
 					delRepo.delete(d);
+					d.setUpdated(new Date());
 					d.setDeliveryStatus(true);
 					delRepo.save(d);
 					return Optional.of(Mappers.DeliveryStatusDaoToDeliveryStatus(d));
