@@ -58,13 +58,4 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Admin> remove(@PathVariable("id") UUID id){
-		Optional<Admin> adminDb = adminService.delete(id);
-		if(adminDb.isPresent()) {
-			return ResponseEntity.status(HttpStatus.OK).body(adminDb.get());
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	}
-	
 }

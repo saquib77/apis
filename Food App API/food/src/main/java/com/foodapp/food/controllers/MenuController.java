@@ -1,5 +1,6 @@
 package com.foodapp.food.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,9 @@ public class MenuController {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
-	@GetMapping("/{menuname}/{dishname}")
-	public ResponseEntity<Dish> getDish(@PathVariable("menuname")String menuName,@PathVariable("dishname")String dishName){
-		Optional<Dish> dishDb = menuService.findDish(menuName,dishName);
+	@GetMapping("")
+	public ResponseEntity<Dish> getDish(@RequestParam List<String> data){
+		Optional<Dish> dishDb = menuService.findDish(data.get(0),data.get(1));
 		if(dishDb.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(dishDb.get());
 		}
@@ -60,8 +61,8 @@ public class MenuController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
-	@PostMapping("/{menuname}/dish")					
-	public ResponseEntity<Menu> addDish(@PathVariable("menuname") String menuName,@RequestBody Dish dish){
+	@PostMapping("/{menu_name}/dish")					
+	public ResponseEntity<Menu> addDish(@PathVariable("menu_name") String menuName,@RequestBody Dish dish){
 		Optional<Menu> dishDb = menuService.addDish(menuName,dish);
 		if(dishDb.isPresent()) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(dishDb.get());
@@ -70,7 +71,7 @@ public class MenuController {
 		
 	}
 	
-	@PutMapping("/{menuname}/dish")					
+	@PutMapping("/{menu_name}/dish")					
 	public ResponseEntity<Menu> updateDish(@PathVariable("menuname") String menuName,@RequestBody Dish dish){
 		Optional<Menu> dishDb = menuService.updateDish(menuName,dish);
 		if(dishDb.isPresent()) {
@@ -79,9 +80,9 @@ public class MenuController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
-	@DeleteMapping("/{menuname}/{dishname}")					
-	public ResponseEntity<Menu> deleteDish(@PathVariable("menuname") String menuName,@PathVariable("dishname")String dishName){
-		Optional<Menu> dishDb = menuService.deleteDish(menuName,dishName);
+	@DeleteMapping("")					
+	public ResponseEntity<Menu> deleteDish(@RequestParam List<String> data){
+		Optional<Menu> dishDb = menuService.deleteDish(data.get(0),data.get(1));
 		if(dishDb.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(dishDb.get());
 		}
