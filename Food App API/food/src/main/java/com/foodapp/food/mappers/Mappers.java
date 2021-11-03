@@ -19,6 +19,7 @@ public class Mappers {
 		p1.setId(p.getId());
 		p1.setEmail(p.getEmail());
 		p1.setAmount(p.getAmount());
+		p1.setRestaurantName(p.getRestaurantName());
 		p1.setMode(p.getMode());
 		p1.setOrderId(p.getOrderId());
 		p1.setStatus(p.getStatus());
@@ -30,10 +31,22 @@ public class Mappers {
 		p1.setId(p.getId());
 		p1.setEmail(p.getEmail());
 		p1.setAmount(p.getAmount());
+		p1.setRestaurantName(p.getRestaurantName());
 		p1.setMode(p.getMode());
 		p1.setOrderId(p.getOrderId());
 		p1.setStatus(p.getStatus());
 		return p1;
+	}
+	
+	public static PaymentDao UpdatePayment(PaymentDao paymentDao, Payment payment) {
+		paymentDao.setId(payment.getId()!=null ? payment.getId() : paymentDao.getId());
+		paymentDao.setEmail(payment.getEmail()!=null ? payment.getEmail() : paymentDao.getEmail());
+		paymentDao.setMode(payment.getMode()!=null ? payment.getMode() : paymentDao.getMode());
+		paymentDao.setRestaurantName(payment.getRestaurantName()!=null ? payment.getRestaurantName() : paymentDao.getRestaurantName());
+		paymentDao.setAmount(payment.getAmount()!=0 ? payment.getAmount() : paymentDao.getAmount());
+		paymentDao.setStatus(payment.getStatus() ? payment.getStatus() : paymentDao.getStatus());
+		paymentDao.setOrderId(payment.getOrderId()!=null ? payment.getOrderId() : paymentDao.getOrderId());
+		return paymentDao;
 	}
 	
 	public static OrderStatusDao GetOrderDetailsDao(OrderStatusDao orderStatusDao, UserOrder order) {
@@ -142,4 +155,6 @@ public class Mappers {
 		return add.getHno() + " " + add.getStreet() +" " + add.getLandmark() + 
 				" " + add.getCity()+" "+ add.getState() +" " + add.getCountry() + " " + add.getPincode();
 	}
+
+
 }

@@ -33,6 +33,7 @@ public class PaymentController {
 	
 	@PostMapping("")
 	public ResponseEntity<Payment> orderPayment(@RequestBody Payment payment){
+		//System.out.println(payment);
 		Optional<Payment> paid = null;
 		if(payment!=null) {
 			paid = paymentService.payOrder(payment);

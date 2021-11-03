@@ -28,14 +28,17 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public Optional<Payment> payOrder(Payment payment) {
+		
 		if(!payment.getStatus() && payment.getId()!=null) {
 			PaymentDao paymentDao = paymentRepo.getById(payment.getId());
+			System.out.println(paymentDao);
 			if(paymentDao.getStatus()) {
 				return Optional.empty();
 			}
 			paymentDao.setStatus(true);
-			paymentDao = paymentRepo.save(paymentDao);
-			return Optional.of(Mappers.PaymentDaoToPayment(paymentDao));
+			PaymentDao paymentDaoDb = Mappers.UpdatePayment(paymentDao,payment);
+			//System.out.println(paymentDaoDb);
+			return Optional.of(Mappers.PaymentDaoToPayment(paymentRepo.save(paymentDaoDb)));
 		}
 		return Optional.empty();
 	}
