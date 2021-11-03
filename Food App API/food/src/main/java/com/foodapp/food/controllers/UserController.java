@@ -10,21 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.foodapp.food.models.Address;
-import com.foodapp.food.models.Menu;
-import com.foodapp.food.models.OrderStatus;
+
 import com.foodapp.food.models.User;
-import com.foodapp.food.models.UserOrder;
 import com.foodapp.food.services.UserService;
 
 @RestController
-@RequestMapping("/api/v1/foodapp/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<User> registerUser(@RequestBody User user){
+	public ResponseEntity<User> addUser(@RequestBody User user){
 		Optional<User> userdb=null;
 		if(user!=null) {
 			userdb = userService.addUser(user);
@@ -85,25 +83,6 @@ public class UserController {
 	}
 	
 	
-	//------------------------------Order---------------------------------
-	
-	@GetMapping("/menu")
-	public ResponseEntity<Menu> getMenu(@RequestParam("restaurantName") String restaurantName){
-		Optional<Menu> menuDb = userService.fetchMenuByRestaurant(restaurantName);
-		if(menuDb.isPresent()) {
-			return ResponseEntity.status(HttpStatus.OK).body(menuDb.get());
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	}
-	
-	@PostMapping("/order")
-	public ResponseEntity<OrderStatus> placeOrder(@RequestBody UserOrder order){
-		Optional<OrderStatus> orderDb = userService.palceOrder(order);
-		if(orderDb.isPresent()) {
-			return ResponseEntity.status(HttpStatus.OK).body(orderDb.get());
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	}
 	
 	
 	

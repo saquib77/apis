@@ -13,18 +13,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodapp.food.models.DeliveryPerson;
 import com.foodapp.food.models.DeliveryStatus;
 import com.foodapp.food.services.DeliveryService;
 
 @RestController
-@RequestMapping("/api/v1/foodapp/delivery")
+@RequestMapping("/api/v1/delivery")
 public class DeliveryController {
 
 	@Autowired
 	private DeliveryService delService; 
 	
-	@GetMapping("/orders/{name}")
-	public ResponseEntity<List<DeliveryStatus>> getAllOrders(@PathVariable("name")String name){
+	@PostMapping("/register")
+	public ResponseEntity<DeliveryPerson> registerDeliveryPerson(@RequestBody DeliveryPerson delPer){
+		Optional<DeliveryPerson> delPerson = delService.addDeliveryPerson(delPer);
+		if(delPerson.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(delPerson.get());
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+	
+	
+	@GetMapping("/{name}")
+	public ResponseEntity<List<DeliveryStatus>> getAllOrdersAssigned(@PathVariable("name")String name){
 		Optional<List<DeliveryStatus>> delOrder = delService.findOrders(name);
 		if(delOrder.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(delOrder.get());
@@ -32,7 +43,7 @@ public class DeliveryController {
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
-	@PostMapping("/orders/{name}")
+	@PostMapping("")
 	public ResponseEntity<DeliveryStatus> deliverOrder(@RequestBody DeliveryStatus delStat){
 		Optional<DeliveryStatus> deliveryStatDb = delService.deliverOrder(delStat); 
 		if(deliveryStatDb.isPresent()) {
