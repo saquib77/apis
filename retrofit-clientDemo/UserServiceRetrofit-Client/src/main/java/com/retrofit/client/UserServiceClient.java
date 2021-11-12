@@ -15,7 +15,7 @@ public class UserServiceClient {
 	
 	public List<UserResponse> getAllUser(){
 		List<UserResponse> list = null;
-		Retrofit retrofit = RetrofitInstance.getInstance();
+		Retrofit retrofit = RetrofitGenerator.getInstance();
 		UserService userService = retrofit.create(UserService.class);
 		Call<List<UserResponse>> callSync = userService.getAllUser();
 		try {
@@ -29,7 +29,7 @@ public class UserServiceClient {
 	
 	public UserResponse getUser(UUID id) {
 		UserResponse userRes=null;
-		Retrofit retrofit = RetrofitInstance.getInstance();
+		Retrofit retrofit = RetrofitGenerator.getInstance();
 		UserService userService = retrofit.create(UserService.class); 
 		Call<UserResponse> callSync = userService.getUserById(id);
 		try {
