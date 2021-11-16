@@ -43,8 +43,8 @@ public class MenuController {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
-	@GetMapping("")
-	public ResponseEntity<Dish> getDish(@RequestParam List<String> data){
+	@GetMapping("/list")
+	public ResponseEntity<Dish> getDishList(@RequestParam List<String> data){
 		Optional<Dish> dishDb = menuService.findDish(data.get(0),data.get(1));
 		if(dishDb.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(dishDb.get());
@@ -71,7 +71,7 @@ public class MenuController {
 		
 	}
 	
-	@PutMapping("/{menu_name}/dish")					
+	@PutMapping("/{menuname}/dish")					
 	public ResponseEntity<Menu> updateDish(@PathVariable("menuname") String menuName,@RequestBody Dish dish){
 		Optional<Menu> dishDb = menuService.updateDish(menuName,dish);
 		if(dishDb.isPresent()) {
